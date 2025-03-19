@@ -29,9 +29,9 @@
         <differential_steering implementation="default" noise_level="0.0" />
         <footbot_light implementation="rot_z_only" show_rays="false" noise_level="0.0" />
 				<positioning implementation="default" noise_level="0.0" />
-	<proximity implementation="default" show_rays="true"/>
+        <footbot_proximity implementation="default" show_rays="false" noise_level="0.0" />
       </sensors>
-      <params script="collision_avoidance.lua" />
+      <params script="collision-avoidance.lua" />
     </lua_controller>
  
   </controllers>
@@ -55,10 +55,10 @@
     </box>
 
     <distribute>
-      <position method="uniform" min="-1.9,-1.9,0" max="1.9,1.9,0" />
+      <position method="uniform" min="-2,-2,0" max="2,2,0" />
       <orientation method="uniform" min="0,0,0" max="360,0,0" />
       <entity quantity="10" max_trials="100">
-	    <box id="b" size="0.3, 0.3, 0.5" movable="false"/>
+        <box id="o" size="0.2, 0.2, 0.4" movable="false" />
       </entity>
     </distribute>
     

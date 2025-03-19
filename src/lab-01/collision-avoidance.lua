@@ -17,10 +17,9 @@ function init()
 end
 
 function getProximity(a, b)
-
 	sum = 0	
 	for i=a,b do
-		sum = sum + robot.proximity[i]
+		sum = sum + robot.proximity[i].value
 	end
 	return sum
 end
@@ -32,29 +31,16 @@ function step()
 	n_steps = n_steps + 1
 	
 	log("step number = " .. n_steps)
-	
-	left = getProximity(1, 4)
-	right = getProximity(20, 24)
-		
-	log("right proximity level = " .. right)
-	log("left proximity level = " .. left)
-	
 
 	if n_steps % MOVE_STEPS == 0 then
+
+		left = getProximity(1, 8)
+		right = getProximity(16, 24)
+			
+		log("right proximity level = " .. right)
+		log("left proximity level = " .. left)
 		
-		if right > 0 then
-			robot.wheels.set_velocity(0,10)
-			robot.leds.set_all_colors("blue")
-		elseif left > 0 then
-			robot.wheels.set_velocity(10,0)
-			robot.leds.set_all_colors("green")
-		else 
-			left_v = robot.random.uniform(0,MAX_VELOCITY)
-			right_v = robot.random.uniform(0,MAX_VELOCITY)
-			robot.wheels.set_velocity(left_v,right_v)
-			robot.leds.set_all_colors("yellow")
-		end
-		
+		robot.wheels.set_velocity(MAX_VELOCITY - (right * MAX_VELOCITY), MAX_VELOCITY - (left * MAX_VELOCITY))
 		
 		log("robot.position.x = " .. robot.positioning.position.x)
 		log("robot.position.y = " .. robot.positioning.position.y)
