@@ -58,9 +58,9 @@
       <orientation method="uniform" min="0,0,0" max="360,0,0" />
       <entity quantity="1" max_trials="100">
       	<light id="light"
-		color="yellow"
-		intensity="1"
-		medium="leds"/>
+              color="yellow"
+              intensity="2"
+              medium="leds"/>
       </entity>
     </distribute>
     

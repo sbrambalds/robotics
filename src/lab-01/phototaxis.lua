@@ -43,7 +43,6 @@ function step()
 	max_id = findMaxId()
 	max_val = robot.light[max_id].value
 		
-	log("max light id = " .. max_id)
 	log("max light val = " .. max_val)
 	
 
