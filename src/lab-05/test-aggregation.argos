@@ -24,7 +24,7 @@
 	<leds implementation="default" medium="leds" />
       </actuators>
       <sensors>
-        <footbot_proximity implementation="default" show_rays="false" />
+        <footbot_proximity implementation="default" show_rays="true" />
         <footbot_motor_ground implementation="rot_z_only" />
         <range_and_bearing implementation="medium" medium="rab" />
       </sensors>
@@ -37,7 +37,7 @@
   <!-- * Arena configuration * -->
   <!-- *********************** -->
   <arena size="5.2, 5.2, 1.2" center="0,0,0.5">
-    <floor id="f" source="image" path="no_spot.png" />
+    <floor id="f" source="image" path="floors/two_spots.png" />
 
     <box id="bn" size="0.1, 5, 0.2" movable="false">
       <body position="2.5,0,0"  orientation="0,0,0" />
@@ -57,7 +57,7 @@
       <orientation method="gaussian" mean="0,0,0" std_dev="360,0,0" /> 
       <entity quantity="50" max_trials="1000"> 
         <foot-bot id="fb" 
-                  rab_range = "1">
+                  rab_range = "0.3">
           <controller config="lua" />
         </foot-bot>
       </entity> 
