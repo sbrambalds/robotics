@@ -5,7 +5,7 @@ LIGHT_THRESHOLD = 0.1
 
 n_steps = 0
 
-active_layer = true
+enabled = true
 
 function init()
 	robot.wheels.set_velocity(MAX_VELOCITY, MAX_VELOCITY)
@@ -35,15 +35,15 @@ function findMaxId()
 end
 
 function randomWalk()
-    if active_layer then
+    if enabled then
         log("randomWalk active")
         robot.wheels.set_velocity(MAX_VELOCITY, MAX_VELOCITY)
     end
 end
 
 function obstacleAvoidance()
-    if getSum(1, 24, robot.proximity, PROX_THRESHOLD) > 0 and active_layer then
-        active_layer = false
+    if getSum(1, 24, robot.proximity, PROX_THRESHOLD) > 0 and enabled then
+        enabled = false
         log("obstacleAvoidance active")
         left_prox = getSum(1, 8, robot.proximity, PROX_THRESHOLD)
         right_prox = getSum(16, 24, robot.proximity, PROX_THRESHOLD)
@@ -53,14 +53,12 @@ function obstacleAvoidance()
         else 
             robot.wheels.set_velocity(0, MAX_VELOCITY)
         end
-    else
-        phototaxis()
     end
 end
 
 function phototaxis()
-    if(getSum(1, 24, robot.light, 0) > LIGHT_THRESHOLD) and active_layer then
-        active_layer = false
+    if(getSum(1, 24, robot.light, 0) > LIGHT_THRESHOLD) and enabled then
+        enabled = false
         log("phototaxis active")
         max_id = findMaxId()
 
@@ -69,17 +67,13 @@ function phototaxis()
         elseif (max_id < 24) and (max_id > 12) then
             robot.wheels.set_velocity(MAX_VELOCITY,0)
         end
-    else 
-        randomWalk()
     end
 end
 
 function halt()
     if getSum(1, 4, robot.motor_ground, 0) < 0.1 then
-        active_layer = false
+        enabled = false
         robot.wheels.set_velocity(0,0)
-    else 
-        obstacleAvoidance()
     end
 end
 
@@ -90,9 +84,12 @@ function step()
 
 	if n_steps % MOVE_STEPS == 0 then
 
-        active_layer = true
+        enabled = true
 
         halt()
+        obstacleAvoidance()
+        phototaxis()
+        randomWalk()
         
 	end		
 end
