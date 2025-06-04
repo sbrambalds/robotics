@@ -36,7 +36,6 @@ end
 
 function randomWalk()
     if enabled then
-        log("randomWalk active")
         robot.wheels.set_velocity(MAX_VELOCITY, MAX_VELOCITY)
     end
 end
@@ -44,7 +43,6 @@ end
 function obstacleAvoidance()
     if getSum(1, 24, robot.proximity, PROX_THRESHOLD) > 0 and enabled then
         enabled = false
-        log("obstacleAvoidance active")
         left_prox = getSum(1, 8, robot.proximity, PROX_THRESHOLD)
         right_prox = getSum(16, 24, robot.proximity, PROX_THRESHOLD)
         
@@ -59,13 +57,14 @@ end
 function phototaxis()
     if(getSum(1, 24, robot.light, 0) > LIGHT_THRESHOLD) and enabled then
         enabled = false
-        log("phototaxis active")
         max_id = findMaxId()
 
         if (max_id < 13) and (max_id > 2) then
             robot.wheels.set_velocity(0,MAX_VELOCITY)
         elseif (max_id < 24) and (max_id > 12) then
             robot.wheels.set_velocity(MAX_VELOCITY,0)
+        else
+            robot.wheels.set_velocity(MAX_VELOCITY,MAX_VELOCITY)
         end
     end
 end
