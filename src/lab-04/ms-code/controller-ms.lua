@@ -55,7 +55,7 @@ function step()
 
         light_polar = {length = 1 - robot.light[maxLightId].value , angle = robot.light[maxLightId].angle}
 
-        prox_polar = {length = robot.proximity[maxProxId].value - 10, angle = (robot.proximity[maxProxId].angle + math.pi) % (math.pi*2)}
+        prox_polar = {length = robot.proximity[maxProxId].value , angle = (robot.proximity[maxProxId].angle + math.pi) % (math.pi*2)}
         
         log("Prox Polar Length = "..prox_polar.length)
 
@@ -69,8 +69,6 @@ function step()
 
         log("Left Velocity = "..vl)
         log("Right Velocity = "..vr)
-
-        
 
         robot.wheels.set_velocity(vl, vr)
 
