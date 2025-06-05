@@ -1,5 +1,3 @@
--- Put your global variables here
-
 MOVE_STEPS = 5
 MAX_VELOCITY = 15
 MAXRANGE = 30
@@ -17,13 +15,9 @@ PWmin = 0.005
 alpha = 0.1
 beta = 0.05
 
---[[ This function is executed every time you press the 'execute'
-     button ]]
 function init()
-	left_v = robot.random.uniform(0,MAX_VELOCITY)
-	right_v = robot.random.uniform(0,MAX_VELOCITY)
-	n_steps = 0
-	robot.leds.set_all_colors("green")
+    robot.random.uniform(MAX_VELOCITY,MAX_VELOCITY)
+    n_steps = 0
 end
 
 function getProximity(a, b)
@@ -64,8 +58,6 @@ function on_spot()
     return false
 end
 
---[[ This function is executed at each time step
-It must contain the logic of your controller ]]
 function step()
     n_steps = n_steps + 1
 
@@ -110,23 +102,11 @@ function step()
 end
 
 
---[[ This function is executed every time you press the 'reset'
-    button in the GUI. It is supposed to restore the state
-    of the controller to whatever it was right after init() was
-    called. The state of sensors and actuators is reset
-    automatically by ARGoS. ]]
 function reset()
-    left_v = robot.random.uniform(0,MAX_VELOCITY)
-    right_v = robot.random.uniform(0,MAX_VELOCITY)
-    robot.wheels.set_velocity(left_v,right_v)
+    robot.random.uniform(MAX_VELOCITY,MAX_VELOCITY)
     n_steps = 0
-    robot.leds.set_all_colors("black")
 end
 
-
-
---[[ This function is executed only once, when the robot is removed
-    from the simulation ]]
 function destroy()
--- put your code here
+
 end
